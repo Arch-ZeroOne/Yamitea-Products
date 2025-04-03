@@ -1,12 +1,12 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Allproducts from "./Allproducts/Allproducts";
+import AllProduct from "./Allproducts/AllProduct";
 
 function Application() {
   return (
     <div>
       <Navbar />
-      <Allproducts />
+      <AllProduct />
     </div>
   );
 }

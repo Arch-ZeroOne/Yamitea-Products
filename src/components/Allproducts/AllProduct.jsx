@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Allproductscard from "./Allproductscard";
-function Allproducts() {
+function AllProduct() {
   const [products, setProducts] = useState();
   useEffect(() => {
     let config = {
@@ -43,4 +43,4 @@ function Allproducts() {
   );
 }
 
-export default Allproducts;
+export default AllProduct;
