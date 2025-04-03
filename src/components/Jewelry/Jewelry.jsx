@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import Allproductscard from "./Allproductscard";
-import Appliances from "../Electronics/Appliances";
+import JewelryCard from "./JewelryCard";
 
-function AllProduct() {
+function Jewelry() {
   const [products, setProducts] = useState();
+  const [jewelry, setJewelry] = useState();
+
   useEffect(() => {
     let config = {
       method: "get",
@@ -28,21 +30,31 @@ function AllProduct() {
       });
   }, []);
 
+  const filterJewelry = (item) => {
+    return item.category.includes("jewelery");
+  };
   const shortenString = (name) => {
     return name.split("").splice(0, 8).join("") + "...";
   };
+
+  useEffect(() => {
+    if (products) {
+      const getJewelry = products.filter(filterJewelry);
+      setJewelry(getJewelry);
+    }
+  }, [products]);
   return (
-    <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-5 ">
-      {products &&
-        products.map((product) => (
-          <Allproductscard
+    <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-3 gap-5 ">
+      {jewelry &&
+        jewelry.map((product) => (
+          <JewelryCard
+            title={shortenString(product.title)}
             price={product.price}
             image={product.image}
-            title={shortenString(product.title)}
           />
         ))}
     </div>
   );
 }
 
-export default AllProduct;
+export default Jewelry;

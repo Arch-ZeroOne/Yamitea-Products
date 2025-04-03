@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import Allproductscard from "./Allproductscard";
-import Appliances from "../Electronics/Appliances";
+import AppliancesCard from "./AppliancesCard";
 
-function AllProduct() {
+function Appliances() {
+  const [appliances, setAppliances] = useState();
   const [products, setProducts] = useState();
+
   useEffect(() => {
     let config = {
       method: "get",
@@ -17,32 +19,42 @@ function AllProduct() {
         "Content-Type": "application/json",
       },
     };
-
     axios
       .request(config)
       .then((response) => {
         setProducts(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }, []);
 
+  const getAppliances = (item) => {
+    return item.category.includes("electronics");
+  };
+
+  useEffect(() => {
+    if (products) {
+      const filterAppliances = products.filter(getAppliances);
+      setAppliances(filterAppliances);
+    }
+  }, [products]);
   const shortenString = (name) => {
     return name.split("").splice(0, 8).join("") + "...";
   };
+
   return (
-    <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-5 ">
-      {products &&
-        products.map((product) => (
-          <Allproductscard
+    <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3   gap-5 ">
+      {appliances &&
+        appliances.map((product) => (
+          <AppliancesCard
+            title={shortenString(product.title)}
             price={product.price}
             image={product.image}
-            title={shortenString(product.title)}
           />
         ))}
     </div>
   );
 }
 
-export default AllProduct;
+export default Appliances;
