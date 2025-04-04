@@ -1,6 +1,6 @@
 import React from "react";
 
-function Allproductscard({ title, price, image }) {
+function AllProductsCard({ title, price, image }) {
   return (
     <div className="flex flex-col items-center w-[300px] text-center  gap-5  border border-gray-200 rounded-xl p-5 h-[350px] justify-center">
       <img src={image} className="h-40 w-auto"></img>
@@ -14,4 +14,4 @@ function Allproductscard({ title, price, image }) {
   );
 }
 
-export default Allproductscard;
+export default AllProductsCard;
