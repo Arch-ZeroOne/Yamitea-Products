@@ -49,7 +49,7 @@ function Logo() {
   return (
     <div className="flex items-center sm:text-sm md:text-center ">
       <img
-        src="src/assets/images/shopping-bag.png"
+        src="/src/assets/images/shopping-bag.png"
         alt="shopping-bag"
         className="h-10"
       />
