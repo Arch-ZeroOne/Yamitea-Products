@@ -29,7 +29,7 @@ function MenClothing() {
   }, []);
 
   const getMenClothing = (item) => {
-    return item.category.includes("men's clothing");
+    return item.category === "men's clothing";
   };
   const shortenString = (name) => {
     return name.split("").splice(0, 8).join("") + "...";
