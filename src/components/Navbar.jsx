@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import logo from "../assets/images/shopping-bag.png";
 function Navbar() {
   return (
     <div className="flex items-center flex-col p-3 justify-between gap-4 sm:gap-10 cursor-pointer md:flex-row">
@@ -48,11 +49,7 @@ function Searchbar() {
 function Logo() {
   return (
     <div className="flex items-center sm:text-sm md:text-center ">
-      <img
-        src="/src/assets/images/shopping-bag.png"
-        alt="shopping-bag"
-        className="h-10"
-      />
+      <img src={logo} alt="shopping-bag" className="h-10" />
       <h2 className="font-medium text-m ">Yamitea Store</h2>
     </div>
   );
