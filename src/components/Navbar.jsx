@@ -48,7 +48,11 @@ function Searchbar() {
 function Logo() {
   return (
     <div className="flex items-center sm:text-sm md:text-center ">
-      <img src="public/shopping-bag.png" alt="shopping-bag" className="h-10" />
+      <img
+        src="src/assets/images/shopping-bag.png"
+        alt="shopping-bag"
+        className="h-10"
+      />
       <h2 className="font-medium text-m ">Yamitea Store</h2>
     </div>
   );
