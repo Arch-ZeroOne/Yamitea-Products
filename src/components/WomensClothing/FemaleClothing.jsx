@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import FemaleClothingCard from "./FemaleClothingCard";
 import { useState, useEffect } from "react";
+import Navbar from "../Navbar";
 function FemaleClothing() {
   const [products, setProducts] = useState();
   const [femaleClothing, setFemaleClothing] = useState();
@@ -44,16 +45,19 @@ function FemaleClothing() {
     return name.split("").splice(0, 8).join("") + "...";
   };
   return (
-    <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3   gap-5">
-      {femaleClothing &&
-        femaleClothing.map((product) => (
-          <FemaleClothingCard
-            title={shortenString(product.title)}
-            price={product.price}
-            image={product.image}
-          />
-        ))}
-    </div>
+    <>
+      <Navbar />
+      <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3   gap-5">
+        {femaleClothing &&
+          femaleClothing.map((product) => (
+            <FemaleClothingCard
+              title={shortenString(product.title)}
+              price={product.price}
+              image={product.image}
+            />
+          ))}
+      </div>
+    </>
   );
 }
 

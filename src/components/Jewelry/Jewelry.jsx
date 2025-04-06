@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import JewelryCard from "./JewelryCard";
+import Navbar from "../Navbar";
 
 function Jewelry() {
   const [products, setProducts] = useState();
@@ -44,16 +45,19 @@ function Jewelry() {
     }
   }, [products]);
   return (
-    <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-3 gap-5 ">
-      {jewelry &&
-        jewelry.map((product) => (
-          <JewelryCard
-            title={shortenString(product.title)}
-            price={product.price}
-            image={product.image}
-          />
-        ))}
-    </div>
+    <>
+      <Navbar />
+      <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-3 gap-5 ">
+        {jewelry &&
+          jewelry.map((product) => (
+            <JewelryCard
+              title={shortenString(product.title)}
+              price={product.price}
+              image={product.image}
+            />
+          ))}
+      </div>
+    </>
   );
 }
 

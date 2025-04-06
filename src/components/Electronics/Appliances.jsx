@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AppliancesCard from "./AppliancesCard";
+import Navbar from "../Navbar";
 
 function Appliances() {
   const [appliances, setAppliances] = useState();
@@ -44,16 +45,19 @@ function Appliances() {
   };
 
   return (
-    <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3   gap-5 ">
-      {appliances &&
-        appliances.map((product) => (
-          <AppliancesCard
-            title={shortenString(product.title)}
-            price={product.price}
-            image={product.image}
-          />
-        ))}
-    </div>
+    <>
+      <Navbar />
+      <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3   gap-5 ">
+        {appliances &&
+          appliances.map((product) => (
+            <AppliancesCard
+              title={shortenString(product.title)}
+              price={product.price}
+              image={product.image}
+            />
+          ))}
+      </div>
+    </>
   );
 }
 

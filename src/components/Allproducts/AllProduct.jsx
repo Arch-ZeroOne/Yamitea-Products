@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AllProductsCard from "./AllProductsCard";
+import Navbar from "../Navbar";
 
 function AllProduct() {
   const [products, setProducts] = useState();
@@ -31,16 +32,19 @@ function AllProduct() {
     return name.split("").splice(0, 8).join("") + "...";
   };
   return (
-    <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-5 ">
-      {products &&
-        products.map((product) => (
-          <AllProductsCard
-            price={product.price}
-            image={product.image}
-            title={shortenString(product.title)}
-          />
-        ))}
-    </div>
+    <>
+      <Navbar />
+      <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-5 ">
+        {products &&
+          products.map((product) => (
+            <AllProductsCard
+              price={product.price}
+              image={product.image}
+              title={shortenString(product.title)}
+            />
+          ))}
+      </div>
+    </>
   );
 }
 
