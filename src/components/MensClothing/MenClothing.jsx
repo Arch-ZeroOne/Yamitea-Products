@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MenClothingCard from "./MenClothingCard";
-import Navbar from "../Navbar";
 import { Link } from "react-router";
 function MenClothing() {
   const [products, setProducts] = useState();
@@ -46,7 +45,6 @@ function MenClothing() {
 
   return (
     <>
-      <Navbar />
       <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-4   gap-5 ">
         {menClothing &&
           menClothing.map((product) => (

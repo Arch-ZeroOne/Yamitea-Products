@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AllProductsCard from "./AllProductsCard";
-import Navbar from "../Navbar";
+import { Link } from "react-router";
 
 function AllProduct() {
   const [products, setProducts] = useState();
@@ -33,15 +33,16 @@ function AllProduct() {
   };
   return (
     <>
-      <Navbar />
       <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-5 ">
         {products &&
           products.map((product) => (
-            <AllProductsCard
-              price={product.price}
-              image={product.image}
-              title={shortenString(product.title)}
-            />
+            <Link to={`product/${product.id}`}>
+              <AllProductsCard
+                price={product.price}
+                image={product.image}
+                title={shortenString(product.title)}
+              />
+            </Link>
           ))}
       </div>
     </>

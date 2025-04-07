@@ -2,7 +2,8 @@ import React from "react";
 import axios from "axios";
 import FemaleClothingCard from "./FemaleClothingCard";
 import { useState, useEffect } from "react";
-import Navbar from "../Navbar";
+import { Link } from "react-router";
+
 function FemaleClothing() {
   const [products, setProducts] = useState();
   const [femaleClothing, setFemaleClothing] = useState();
@@ -46,15 +47,17 @@ function FemaleClothing() {
   };
   return (
     <>
-      <Navbar />
       <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3   gap-5">
         {femaleClothing &&
           femaleClothing.map((product) => (
-            <FemaleClothingCard
-              title={shortenString(product.title)}
-              price={product.price}
-              image={product.image}
-            />
+            <Link to={`product/${product.id}`}>
+              <FemaleClothingCard
+                key={product.id}
+                title={shortenString(product.title)}
+                price={product.price}
+                image={product.image}
+              />
+            </Link>
           ))}
       </div>
     </>

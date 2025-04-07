@@ -3,8 +3,9 @@ import { useParams } from "react-router";
 import axios from "axios";
 import ProductInfoCard from "./ProductInfoCard";
 function ProductInfo() {
+  //id from dynamic routing :id
   const { id } = useParams();
-  const [product, setProduct] = useState([]);
+  const [products, setProducts] = useState();
 
   useEffect(() => {
     let config = {
@@ -22,21 +23,26 @@ function ProductInfo() {
     axios
       .request(config)
       .then((response) => {
-        setProduct(response.data);
+        setProducts(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
   }, [id]);
-  useEffect(() => {
-    console.log(product);
-  }, [product]);
+
   return (
     <div>
-      {product &&
-        product.map((item) => (
-          <ProductInfoCard key={item.id} name={item.name} img={item.img} />
-        ))}
+      {products && (
+        <ProductInfoCard
+          key={products.id}
+          name={products.title}
+          img={products.image}
+          price={products.price}
+          description={products.description}
+          rating={products.rating.rate}
+          stocks={products.rating.count}
+        />
+      )}
     </div>
   );
 }

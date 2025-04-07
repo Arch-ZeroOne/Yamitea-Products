@@ -2,8 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AppliancesCard from "./AppliancesCard";
-import Navbar from "../Navbar";
-
+import { Link } from "react-router";
 function Appliances() {
   const [appliances, setAppliances] = useState();
   const [products, setProducts] = useState();
@@ -46,15 +45,16 @@ function Appliances() {
 
   return (
     <>
-      <Navbar />
       <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3   gap-5 ">
         {appliances &&
           appliances.map((product) => (
-            <AppliancesCard
-              title={shortenString(product.title)}
-              price={product.price}
-              image={product.image}
-            />
+            <Link to={`product/${product.id}`}>
+              <AppliancesCard
+                title={shortenString(product.title)}
+                price={product.price}
+                image={product.image}
+              />
+            </Link>
           ))}
       </div>
     </>
