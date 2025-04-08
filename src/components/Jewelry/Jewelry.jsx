@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 import JewelryCard from "./JewelryCard";
-
+import { useSearchHistory } from "../ContextProvider/ContextProvider";
 function Jewelry() {
   const [products, setProducts] = useState();
   const [jewelry, setJewelry] = useState();
+  const [copy, setCopy] = useState();
+  const { value } = useSearchHistory();
 
   useEffect(() => {
     let config = {
@@ -37,13 +39,27 @@ function Jewelry() {
   const shortenString = (name) => {
     return name.split("").splice(0, 8).join("") + "...";
   };
+  const handleSearch = (item) => {
+    return item.title.includes(value);
+  };
 
   useEffect(() => {
     if (products) {
+      console.log("Changed");
       const getJewelry = products.filter(filterJewelry);
       setJewelry(getJewelry);
+      setCopy(getJewelry);
     }
   }, [products]);
+
+  useEffect(() => {
+    if (value) {
+      const filtered = jewelry.filter(handleSearch);
+      setJewelry(filtered);
+    } else {
+      setJewelry(copy);
+    }
+  }, [value]);
   return (
     <>
       <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-3 gap-5 ">

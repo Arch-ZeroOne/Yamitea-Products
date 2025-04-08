@@ -3,9 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import MenClothingCard from "./MenClothingCard";
 import { Link } from "react-router";
+import { useSearchHistory } from "../ContextProvider/ContextProvider";
 function MenClothing() {
   const [products, setProducts] = useState();
   const [menClothing, setMenClothing] = useState();
+  const [copy, setCopy] = useState();
+  const { value } = useSearchHistory();
 
   useEffect(() => {
     let config = {
@@ -30,18 +33,30 @@ function MenClothing() {
   }, []);
 
   const getMenClothing = (item) => {
-    return item.category === "men's clothing";
+    return item.category.includes("men's clothing");
   };
   const shortenString = (name) => {
     return name.split("").splice(0, 8).join("") + "...";
+  };
+  const handleSearch = (item) => {
+    return item.title.includes(value);
   };
 
   useEffect(() => {
     if (products) {
       const getMaleClothing = products.filter(getMenClothing);
       setMenClothing(getMaleClothing);
+      setCopy(getMaleClothing);
     }
   }, [products]);
+  useEffect(() => {
+    if (value) {
+      const filtered = menClothing.filter(handleSearch);
+      setMenClothing(filtered);
+    } else {
+      setMenClothing(copy);
+    }
+  }, [value]);
 
   return (
     <>

@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AllProductsCard from "./AllProductsCard";
 import { Link } from "react-router";
+import { useSearchHistory } from "../ContextProvider/ContextProvider";
 
 function AllProduct() {
   const [products, setProducts] = useState();
+  const [copy, setCopy] = useState();
+  const { value, setValue } = useSearchHistory();
   useEffect(() => {
     let config = {
       method: "get",
@@ -21,6 +24,7 @@ function AllProduct() {
     axios
       .request(config)
       .then((response) => {
+        setCopy(response.data);
         setProducts(response.data);
       })
       .catch((error) => {
@@ -28,9 +32,23 @@ function AllProduct() {
       });
   }, []);
 
+  useEffect(() => {
+    if (value) {
+      const filtered = products.filter(handleSearch);
+      setProducts(filtered);
+    } else {
+      setProducts(copy);
+    }
+  }, [value]);
+
+  const handleSearch = (product) => {
+    return product.title.includes(value);
+  };
+
   const shortenString = (name) => {
     return name.split("").splice(0, 8).join("") + "...";
   };
+
   return (
     <>
       <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-5 ">
@@ -38,6 +56,7 @@ function AllProduct() {
           products.map((product) => (
             <Link to={`/product/${product.id}`}>
               <AllProductsCard
+                key={product.id}
                 price={product.price}
                 image={product.image}
                 title={shortenString(product.title)}

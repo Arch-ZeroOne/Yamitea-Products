@@ -3,10 +3,13 @@ import axios from "axios";
 import FemaleClothingCard from "./FemaleClothingCard";
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
+import { useSearchHistory } from "../ContextProvider/ContextProvider";
 
 function FemaleClothing() {
   const [products, setProducts] = useState();
+  const [copy, setCopy] = useState();
   const [femaleClothing, setFemaleClothing] = useState();
+  const { value } = useSearchHistory();
 
   useEffect(() => {
     let config = {
@@ -34,17 +37,29 @@ function FemaleClothing() {
   const getFemaleLine = (item) => {
     return item.category.includes("women's clothing");
   };
-
+  const shortenString = (name) => {
+    return name.split("").splice(0, 8).join("") + "...";
+  };
+  const handleSearch = (item) => {
+    return item.title.includes(value);
+  };
   useEffect(() => {
     if (products) {
       const getFemaleClothing = products.filter(getFemaleLine);
       setFemaleClothing(getFemaleClothing);
+      setCopy(getFemaleClothing);
     }
   }, [products]);
 
-  const shortenString = (name) => {
-    return name.split("").splice(0, 8).join("") + "...";
-  };
+  useEffect(() => {
+    if (value) {
+      const filter = femaleClothing.filter(handleSearch);
+      setFemaleClothing(filter);
+    } else {
+      setFemaleClothing(copy);
+    }
+  }, [value]);
+
   return (
     <>
       <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3   gap-5">

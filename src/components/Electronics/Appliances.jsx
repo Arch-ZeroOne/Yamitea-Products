@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AppliancesCard from "./AppliancesCard";
 import { Link } from "react-router";
+import { useSearchHistory } from "../ContextProvider/ContextProvider";
 function Appliances() {
   const [appliances, setAppliances] = useState();
   const [products, setProducts] = useState();
+  const [copy, setCopy] = useState();
+  const { value } = useSearchHistory();
 
   useEffect(() => {
     let config = {
@@ -32,16 +35,29 @@ function Appliances() {
   const getAppliances = (item) => {
     return item.category.includes("electronics");
   };
+  const shortenString = (name) => {
+    return name.split("").splice(0, 8).join("") + "...";
+  };
+  const handleSearch = (item) => {
+    return item.title.includes(value);
+  };
 
   useEffect(() => {
     if (products) {
       const filterAppliances = products.filter(getAppliances);
       setAppliances(filterAppliances);
+      setCopy(filterAppliances);
     }
   }, [products]);
-  const shortenString = (name) => {
-    return name.split("").splice(0, 8).join("") + "...";
-  };
+
+  useEffect(() => {
+    if (value) {
+      const filter = products.filter(handleSearch);
+      setAppliances(filter);
+    } else {
+      setAppliances(copy);
+    }
+  }, [value]);
 
   return (
     <>
@@ -50,6 +66,7 @@ function Appliances() {
           appliances.map((product) => (
             <Link to={`/product/${product.id}`}>
               <AppliancesCard
+                key={product.id}
                 title={shortenString(product.title)}
                 price={product.price}
                 image={product.image}

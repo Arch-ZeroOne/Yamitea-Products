@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
 import logo from "../assets/images/shopping-bag.png";
+import { useSearchHistory } from "./ContextProvider/ContextProvider";
 function Navbar() {
   return (
     <div className="flex items-center flex-col p-3 justify-between gap-4 sm:gap-10 cursor-pointer md:flex-row">
@@ -34,12 +35,18 @@ function Links() {
 }
 
 function Searchbar() {
+  const { value, setValue } = useSearchHistory();
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
   return (
     <div className="border border-gray-200 p-2 rounded-md flex">
       <input
         type="text"
         placeholder="Search for a product...."
         className="  w-sm  rounded text-sm outline-0 sm:w-xs md:text-xs md:w-xs"
+        onChange={handleChange}
       />
       <i className="fa-solid fa-magnifying-glass"></i>
     </div>
