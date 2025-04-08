@@ -48,7 +48,7 @@ function MenClothing() {
       <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-4   gap-5 ">
         {menClothing &&
           menClothing.map((product) => (
-            <Link to={`product/${product.id}`}>
+            <Link to={`/product/${product.id}`}>
               <MenClothingCard
                 key={product.id}
                 title={shortenString(product.title)}

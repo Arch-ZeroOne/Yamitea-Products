@@ -48,7 +48,7 @@ function Appliances() {
       <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3   gap-5 ">
         {appliances &&
           appliances.map((product) => (
-            <Link to={`product/${product.id}`}>
+            <Link to={`/product/${product.id}`}>
               <AppliancesCard
                 title={shortenString(product.title)}
                 price={product.price}

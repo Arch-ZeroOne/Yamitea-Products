@@ -36,7 +36,7 @@ function AllProduct() {
       <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-5 ">
         {products &&
           products.map((product) => (
-            <Link to={`product/${product.id}`}>
+            <Link to={`/product/${product.id}`}>
               <AllProductsCard
                 price={product.price}
                 image={product.image}

@@ -14,15 +14,20 @@ function Application() {
       <Routes>
         <Route path="/">
           <Route index element={<AllProduct />} />
-          <Route path="/electronics" element={<Appliances />} />
-          <Route path="/menclothing" element={<MenClothing />} />
-          <Route path="/womenclothing" element={<FemaleClothing />} />
-          <Route path="/jewelry" element={<Jewelry />} />
-          <Route path="/menclothing/product/:id" element={<ProductInfo />} />
-          <Route path="/jewelry/product/:id" element={<ProductInfo />} />
-          <Route path="/womenclothing/product/:id" element={<ProductInfo />} />
-          <Route path="/electronics/product/:id" element={<ProductInfo />} />
-          <Route path="/product/:id" element={<ProductInfo />} />
+          <Route path="product/:id" element={<ProductInfo />} />
+          <Route path="/electronics" element={<Appliances />}>
+            <Route path="product/:id" element={<ProductInfo />} />
+          </Route>
+          <Route path="/menclothing" element={<MenClothing />}>
+            <Route path="product/:id" element={<ProductInfo />} />
+          </Route>
+
+          <Route path="/womenclothing" element={<FemaleClothing />}>
+            <Route path="product/:id" element={<ProductInfo />} />
+          </Route>
+          <Route path="/jewelry" element={<Jewelry />}>
+            <Route path="product/:id" element={<ProductInfo />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
