@@ -10,7 +10,11 @@ function ProductInfoCard({ img, name, price, description, rating, stocks }) {
           <h2 className="font-bold text-lg self-start">Product Description:</h2>
           <p className="text-md/7">{description}</p>
         </section>
-        <p className="font-bold text-lg">${price}</p>
+        <section className="flex gap-8">
+          <p className="font-medium text-lg">Available: {stocks}</p>
+
+          <p className="font-medium text-lg">${price}</p>
+        </section>
         <section className="flex gap-5 items-center font-bold">
           <button className="bg-black text-white w-[180px] p-4 rounded-lg text-md">
             Buy
