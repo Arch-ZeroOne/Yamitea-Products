@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
 import logo from "../assets/images/shopping-bag.png";
+import HamburgerMenu from "./Menu/HamburgerMenu";
 import { useSearchHistory } from "./ContextProvider/ContextProvider";
 function Navbar() {
+  const breakpoint = window.matchMedia("(max-width:700px)");
+
+  useEffect(() => {
+    console.log(breakpoint);
+  }, [breakpoint]);
   return (
     <div className="flex items-center flex-col p-3  gap-5 cursor-pointer md:flex-row ">
       <Logo />
-      <Links />
+      {breakpoint.matches === true ? <HamburgerMenu /> : <Navbar />}
       <Searchbar />
     </div>
   );

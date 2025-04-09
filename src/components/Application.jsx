@@ -3,11 +3,11 @@ import AllProduct from "./Allproducts/AllProduct";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Appliances from "./Electronics/Appliances";
 import MenClothing from "./Clothing/Clothing";
-
 import Jewelry from "./Jewelry/Jewelry";
 import ProductInfo from "./Info/ProductInfo";
 import Navbar from "./Navbar";
 import ContextProvider from "./ContextProvider/ContextProvider";
+
 function Application() {
   return (
     <ContextProvider>
