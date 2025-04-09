@@ -1,14 +1,13 @@
 import React from "react";
-import axios from "axios";
-import FemaleClothingCard from "./FemaleClothingCard";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import ClothingCard from "./ClothingCard";
 import { Link } from "react-router";
 import { useSearchHistory } from "../ContextProvider/ContextProvider";
-
-function FemaleClothing() {
+function MenClothing() {
   const [products, setProducts] = useState();
+  const [clothing, setClothing] = useState();
   const [copy, setCopy] = useState();
-  const [femaleClothing, setFemaleClothing] = useState();
   const { value } = useSearchHistory();
 
   useEffect(() => {
@@ -23,50 +22,40 @@ function FemaleClothing() {
         "Content-Type": "application/json",
       },
     };
-
     axios
       .request(config)
       .then((response) => {
         setProducts(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }, []);
 
-  const getFemaleLine = (item) => {
-    return item.category.includes("women's clothing");
-  };
   const shortenString = (name) => {
     return name.split("").splice(0, 8).join("") + "...";
   };
   const handleSearch = (item) => {
     return item.title.includes(value);
   };
+  const getClothing = (item) => {
+    return item.category.includes("clothing");
+  };
+
+  useEffect(() => {}, [value]);
   useEffect(() => {
     if (products) {
-      const getFemaleClothing = products.filter(getFemaleLine);
-      setFemaleClothing(getFemaleClothing);
-      setCopy(getFemaleClothing);
+      const filtered = products.filter(getClothing);
+      setClothing(filtered);
     }
   }, [products]);
-
-  useEffect(() => {
-    if (value) {
-      const filter = femaleClothing.filter(handleSearch);
-      setFemaleClothing(filter);
-    } else {
-      setFemaleClothing(copy);
-    }
-  }, [value]);
-
   return (
     <>
-      <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-4  gap-5">
-        {femaleClothing &&
-          femaleClothing.map((product) => (
+      <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4   gap-5 ">
+        {clothing &&
+          clothing.map((product) => (
             <Link to={`/product/${product.id}`}>
-              <FemaleClothingCard
+              <ClothingCard
                 key={product.id}
                 title={shortenString(product.title)}
                 price={product.price}
@@ -79,4 +68,4 @@ function FemaleClothing() {
   );
 }
 
-export default FemaleClothing;
+export default MenClothing;

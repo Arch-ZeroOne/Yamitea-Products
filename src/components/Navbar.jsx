@@ -4,7 +4,7 @@ import logo from "../assets/images/shopping-bag.png";
 import { useSearchHistory } from "./ContextProvider/ContextProvider";
 function Navbar() {
   return (
-    <div className="flex items-center flex-col p-3 justify-between gap-4 sm:gap-10 cursor-pointer lg:flex-row md:justify-center ">
+    <div className="flex items-center flex-col p-3  gap-5 cursor-pointer md:flex-row ">
       <Logo />
       <Links />
       <Searchbar />
@@ -14,16 +14,14 @@ function Navbar() {
 
 function Links() {
   return (
-    <div className="flex  items-center gap-8 list-none text-sm flex-col sm:flex-row sm:gap-10 sm:text-sm sm:text-center  md:gap-5  lg:text-[15px] lg:gap:20 ">
+    <div className="flex  items-center justify-around gap-5  list-none text-sm flex-col sm:flex-row sm:gap-10 sm:text-center  md:gap-5  lg:gap-20  w-[50%]">
       <Link to="/">
-        <li className="hover:underline underline-offset-8">All products</li>
+        <li className="hover:underline underline-offset-8">Products</li>
       </Link>
       <Link to="/menclothing">
-        <li className="hover:underline underline-offset-8">Mens Clothing</li>
+        <li className="hover:underline underline-offset-8">Clothing</li>
       </Link>
-      <Link to="/womenclothing">
-        <li className="hover:underline underline-offset-8">Womens Clothing</li>
-      </Link>
+
       <Link to="/electronics">
         <li className="hover:underline underline-offset-8">Electronics</li>
       </Link>
@@ -41,7 +39,7 @@ function Searchbar() {
   };
 
   return (
-    <div className="border border-gray-200 p-2 rounded-md flex">
+    <div className="border border-gray-200 p-2 rounded-md flex items-center sm:w-[40%] justify-between ">
       <input
         type="text"
         placeholder="Search for a product...."
@@ -55,9 +53,9 @@ function Searchbar() {
 
 function Logo() {
   return (
-    <div className="flex items-center sm:text-sm md:text-center ">
+    <div className="flex items-center w-[10%] gap-2">
       <img src={logo} alt="shopping-bag" className="h-10" />
-      <h2 className="font-bold text-m  ">Yamitea Store</h2>
+      <h2 className="font-semibold  text-sm lg:text-center  ">MyStore</h2>
     </div>
   );
 }
