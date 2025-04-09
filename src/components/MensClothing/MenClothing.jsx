@@ -33,7 +33,7 @@ function MenClothing() {
   }, []);
 
   const getMenClothing = (item) => {
-    return item.category.includes("men's clothing");
+    return item.category === "men's clothing";
   };
   const shortenString = (name) => {
     return name.split("").splice(0, 8).join("") + "...";
@@ -60,7 +60,7 @@ function MenClothing() {
 
   return (
     <>
-      <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-4   gap-5 ">
+      <div className="grid grid-cols-1   justify-items-center mt-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4   gap-5 ">
         {menClothing &&
           menClothing.map((product) => (
             <Link to={`/product/${product.id}`}>
