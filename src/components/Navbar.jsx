@@ -2,25 +2,41 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
 import logo from "../assets/images/shopping-bag.png";
 import HamburgerMenu from "./Menu/HamburgerMenu";
+import HiddenMenu from "./Menu/HiddenMenu";
 import { useSearchHistory } from "./ContextProvider/ContextProvider";
 function Navbar() {
-  const breakpoint = window.matchMedia("(max-width:700px)");
+  const mediaQuery = window.matchMedia("(max-width:974px)");
+  const [menu, setMenu] = useState(false);
+  const handleChange = (e) => {
+    if (e.matches) {
+      setMenu(true);
+    } else {
+      setMenu(false);
+    }
+  };
 
-  useEffect(() => {
-    console.log(breakpoint);
-  }, [breakpoint]);
+  mediaQuery.addEventListener("change", handleChange);
+
   return (
-    <div className="flex items-center flex-col p-3  gap-5 cursor-pointer md:flex-row ">
+    <NavbarControl>
       <Logo />
-      {breakpoint.matches === true ? <HamburgerMenu /> : <Navbar />}
+      <HiddenMenu />
+      {menu ? <HamburgerMenu /> : <Links />}
       <Searchbar />
-    </div>
+    </NavbarControl>
   );
 }
-
-function Links() {
+const NavbarControl = ({ children }) => {
   return (
-    <div className="flex  items-center justify-around gap-5  list-none text-sm flex-col sm:flex-row sm:gap-10 sm:text-center  md:gap-5  lg:gap-20  w-[50%]">
+    <div className="flex items-center flex-col p-3 sm:flex-row  gap-5 cursor-pointer   md:justify-around sm:justify-around">
+      {children}
+    </div>
+  );
+};
+
+export function Links() {
+  return (
+    <div className="flex flex-col   items-center justify-around gap-5  list-none text-sm  sm:flex-row sm:gap-10 sm:text-center  md:gap-5  lg:gap-20  w-[50%]">
       <Link to="/">
         <li className="hover:underline underline-offset-8">Products</li>
       </Link>
@@ -49,7 +65,7 @@ function Searchbar() {
       <input
         type="text"
         placeholder="Search for a product...."
-        className="  w-sm  rounded text-sm outline-0 sm:w-xsm md:text-sm md:p-1 md:w-xs "
+        className="  w-sm  rounded text-sm outline-0  md:text-sm md:p-1  "
         onChange={handleChange}
       />
       <i className="fa-solid fa-magnifying-glass"></i>

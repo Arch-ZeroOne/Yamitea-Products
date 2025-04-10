@@ -1,15 +1,22 @@
 import React, { useState, useContext } from "react";
-export const SearchContext = React.createContext();
-
+const SearchContext = React.createContext();
+const MenuContext = React.createContext();
 export const useSearchHistory = () => {
   return useContext(SearchContext);
 };
+
+export const useMenu = () => {
+  return useContext(MenuContext);
+};
 export default function ({ children }) {
   const [value, setValue] = useState("");
+  const [show, setShow] = useState(false);
 
   return (
-    <SearchContext.Provider value={{ value, setValue }}>
-      {children}
-    </SearchContext.Provider>
+    <MenuContext.Provider value={{ show, setShow }}>
+      <SearchContext.Provider value={{ value, setValue }}>
+        {children}
+      </SearchContext.Provider>
+    </MenuContext.Provider>
   );
 }

@@ -23,7 +23,6 @@ function Application() {
             <Route path="/menclothing" element={<MenClothing />}>
               <Route path="product/:id" element={<ProductInfo />} />
             </Route>
-
             <Route path="/jewelry" element={<Jewelry />}>
               <Route path="product/:id" element={<ProductInfo />} />
             </Route>
